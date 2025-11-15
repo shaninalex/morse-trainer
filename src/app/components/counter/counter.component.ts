@@ -1,23 +1,21 @@
-import { Component, OnDestroy, OnInit, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
-import { BehaviorSubject } from 'rxjs'; 
-import { dictionary, IDictItem } from '../dict';
-
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {dictionary} from '../dict';
+import {NgClass} from '@angular/common';
 
 @Component({
     selector: '#counter',
     templateUrl: './counter.component.html',
-    styleUrls: ['./counter.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    imports: [NgClass]
 })
 export class CounterComponent implements OnInit, OnDestroy {
-
     // milisecond
     minimum_speed: number = 5000;
     maximum_speed: number = 1000;
 
     interval_speed: number = 2000;
     running: boolean = false;
-    interval_id;
+    interval_id: any;
     symbols: Array<string> = [
         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
         "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+"
@@ -30,7 +28,7 @@ export class CounterComponent implements OnInit, OnDestroy {
     html_input_value: number = 40;
     speed: BehaviorSubject<number> = new BehaviorSubject<number>(2000);
 
-    session_timer;
+    session_timer: any;
     session_timer_time: number = 0;
     session_length: number = 900;
     session_timer_end: number = 900;
@@ -42,13 +40,13 @@ export class CounterComponent implements OnInit, OnDestroy {
         });
     }
 
-    onInputChange($event) {
+    onInputChange($event: any) {
         const current_value = parseInt($event.target.value);
         const speed_in_milliseconds = Math.floor((current_value/100) * this.minimum_speed);
         this.interval_speed = speed_in_milliseconds;
         this.speed.next(speed_in_milliseconds);
         if ($event.target.value.length) {
-            this.startCounter(); 
+            this.startCounter();
         }
     }
 
@@ -70,7 +68,7 @@ export class CounterComponent implements OnInit, OnDestroy {
         clearInterval(this.session_timer);
     }
 
-    toggleDictionary() { 
+    toggleDictionary() {
         this.running = false;
         clearInterval(this.interval_id);
         clearInterval(this.session_timer);
@@ -100,7 +98,7 @@ export class CounterComponent implements OnInit, OnDestroy {
             }
         }, 1000);
     }
-    
+
     show_end_time() {
         const endtime = this.session_timer_end;
         const minutes = Math.floor(endtime/60);
