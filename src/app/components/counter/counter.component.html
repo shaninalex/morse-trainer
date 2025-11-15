@@ -3,8 +3,7 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <ul class="nav nav-pills mb-0">
                 <li class="nav-item mr-2">
-                    <button (click)="startCounter()" [ngClass]="{'btn-outline-success': !running, 'btn-success': running}"
-                            class="btn">Start</button>
+                    <button (click)="startCounter()" class="btn">Start</button>
                 </li>
                 <li class="nav-item mr-2">
                     <button (click)="stopCounter()" class="btn btn-outline-warning">Stop</button>
@@ -12,8 +11,13 @@
                 <li class="nav-item mr-2">
                     <button (click)="toggleDictionary()"
                             type="button"
-                            [ngClass]="is_dict? 'btn-warning': 'btn-outline-warning'"
-                            class="btn">Abbreviations</button>
+                            class="btn">
+                        @if (is_dict) {
+                            Alphabet
+                        } @else {
+                            Abbreviations
+                        }
+                    </button>
                 </li>
             </ul>
 

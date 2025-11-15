@@ -1,17 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {dictionary} from '../dict';
-import {NgClass} from '@angular/common';
 
 @Component({
     selector: '#counter',
     templateUrl: './counter.component.html',
-    imports: [NgClass]
 })
 export class CounterComponent implements OnInit, OnDestroy {
-    // milisecond
     minimum_speed: number = 5000;
-    maximum_speed: number = 1000;
 
     interval_speed: number = 2000;
     running: boolean = false;
@@ -29,7 +25,6 @@ export class CounterComponent implements OnInit, OnDestroy {
     speed: BehaviorSubject<number> = new BehaviorSubject<number>(2000);
 
     session_timer: any;
-    session_timer_time: number = 0;
     session_length: number = 900;
     session_timer_end: number = 900;
 
